@@ -6,14 +6,14 @@ import Axios from "axios";
 function App() {
   const [inputTask, setInputTask] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const api = {
-    backend_url: process.env.REACT_APP_BACKEND_URL,
-  };
+  const backend_url = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
-    Axios.get(`${api.backend_url}/read`).then((res) => {
+    Axios.get(`${backend_url}/read`).then((res) => {
       setTasks(res.data);
+      setIsLoaded(true);
     });
   }, []);
 
@@ -23,17 +23,13 @@ function App() {
   }
 
   async function addItem() {
-    await Axios.post(`${api.backend_url}/create`, { taskName: inputTask });
-    await Axios.get(`${api.backend_url}/read`).then((res) =>
-      setTasks(res.data)
-    );
+    await Axios.post(`${backend_url}/create`, { taskName: inputTask });
+    await Axios.get(`${backend_url}/read`).then((res) => setTasks(res.data));
     setInputTask("");
   }
   async function deleteItem(id) {
-    await Axios.delete(`${api.backend_url}/delete/${id}`);
-    await Axios.get(`${api.backend_url}/read`).then((res) =>
-      setTasks(res.data)
-    );
+    await Axios.delete(`${backend_url}/delete/${id}`);
+    await Axios.get(`${backend_url}/read`).then((res) => setTasks(res.data));
     // setTasks((prevItems) => {
     //   return prevItems.filter((item, index) => {
     //     return index !== id;
@@ -52,16 +48,17 @@ function App() {
       />
       <div>
         <ul>
-          {tasks.map((item) => {
-            return (
-              <ToDoItem
-                key={item._id}
-                id={item._id}
-                item={item}
-                onChecked={deleteItem}
-              />
-            );
-          })}
+          {isLoaded &&
+            tasks.map((item) => {
+              return (
+                <ToDoItem
+                  key={item._id}
+                  id={item._id}
+                  item={item}
+                  onChecked={deleteItem}
+                />
+              );
+            })}
         </ul>
       </div>
     </div>
