@@ -7,15 +7,16 @@ function App() {
   const [inputTask, setInputTask] = useState("");
   const [tasks, setTasks] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
   const backend_url = process.env.REACT_APP_BACKEND_URL;
 
+  //retreving data from backend
+  //called on first render
   useEffect(() => {
     Axios.get(`${backend_url}/read`).then((res) => {
       setTasks(res.data);
       setIsLoaded(true);
     });
-  }, []);
+  }, [backend_url]);
 
   function handleChange(event) {
     const newValue = event.target.value;
