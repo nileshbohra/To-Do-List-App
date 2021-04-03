@@ -15,7 +15,7 @@ function App() {
     Axios.get(`${api.backend_url}/read`).then((res) => {
       setTasks(res.data);
     });
-  }, [api.backend_url]);
+  }, []);
 
   function handleChange(event) {
     const newValue = event.target.value;
