@@ -5,18 +5,18 @@
   box-sizing: border-box;
 }
 
-body {
+body{
+  width: 100vw;
   background-color: #ffeaa7;
   min-height: 70vh;
   padding: 1rem;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   color: hsl(198, 1%, 29%);
   font-family: "Architects Daughter", cursive;
   text-align: center;
-  font-size: 130%;
+  font-size: 19px; 
 }
 
 .container {
