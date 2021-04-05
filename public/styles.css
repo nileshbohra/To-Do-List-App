@@ -1,3 +1,10 @@
+/* -------------------------------- css reset ------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #ffeaa7;
   min-height: 70vh;
@@ -41,7 +48,6 @@ body {
 }
 
 .form input {
-  box-sizing: border-box;
   background-color: transparent;
   padding: 0.7rem;
   border-bottom-right-radius: 15px 3px;
@@ -53,6 +59,7 @@ body {
   color: hsla(260, 2%, 25%, 0.7);
   width: 70%;
   margin-bottom: 20px;
+  outline: none;
 }
 
 button {
@@ -72,22 +79,75 @@ button span {
   border: 2px solid hsl(198, 1%, 29%);
 }
 
-li.taskItem {
+.taskbtnWrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.taskBtn {
+  padding: 10px;
+  font-size: 17px;
+  border-radius: 5px;
+  background-color: white;
+}
+.active {
+  background-color: #ffeaa7;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 3px solid #ffc400;
+}
+.taskItem {
   text-align: left;
-  position: relative;
   padding: 0.5rem;
   list-style: square;
 }
-div.task {
+.task,
+.taskCompleted {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.deleteBtn{
+.taskCompleted {
+  margin-left: 19px;
+}
+.task > span > input {
+  margin-right: 10px;
+  transform: scale(1.25);
+}
+.deleteBtn,
+.editBtn {
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
 }
-.deleteBtn:hover{
+.updateTask{
+  display: flex;
+  align-items: center;
+}
+.updateInput {
+  background-color: transparent;
+  padding: 0.6rem;
+  border-bottom-right-radius: 15px 3px;
+  border-bottom-left-radius: 3px 15px;
+  border: solid 3px transparent;
+  border-bottom: dashed 3px #fdcb6e;
+  font-family: "Architects Daughter", cursive;
+  font-size: 1rem;
+  color: hsla(260, 2%, 25%, 0.7);
+  width: 70%;
+  outline:none;
+}
+.updateBtn{
+padding: 10px;  
+font-size: 15px;
+}
+
+.deleteBtn:hover,
+.editBtn:hover,
+.updateBtn:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
