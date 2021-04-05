@@ -55,6 +55,7 @@ function App() {
   async function updateTask(id, taskName) {
     await Axios.put(`${backend_url}/update/${id}`, { taskName: taskName });
     fetchData();
+    setNewValue("");
   }
 
   /* -------------------- Axios Routes for Completed Tasks -------------------- */
