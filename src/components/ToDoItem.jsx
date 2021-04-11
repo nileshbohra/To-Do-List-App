@@ -5,6 +5,15 @@ import CancelIcon from "@material-ui/icons/Cancel";
 function ToDoItem(props) {
   const [isChecked, setChecked] = useState(null);
   const [onClick, setOnClick] = useState(false);
+  const [newValue, setNewValue] = useState(props.item);
+
+  function handleChange(e) {
+    const { value } = e.target;
+    setNewValue((preValue) => {
+      return { ...preValue, taskName: value };
+    });
+  }
+
   return (
     <div className="taskItem">
       <div className="task">
@@ -12,16 +21,15 @@ function ToDoItem(props) {
           <div className="updateTask">
             <input
               type="text"
-              onChange={props.handleUpdate}
-              value={props.newValue}
-              placeholder={props.updatePlaceholder}
+              onChange={handleChange}
+              value={newValue.taskName}
               className="updateInput"
             />
             <button
               type="submit"
               className="updateBtn"
               onClick={() => {
-                props.updateTask(props.item._id, props.newValue);
+                props.updateTask(props.item._id, newValue.taskName);
                 setOnClick(false);
               }}
             >

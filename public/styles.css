@@ -8,7 +8,7 @@
 body{
   width: 100vw;
   background-color: #ffeaa7;
-  min-height: 70vh;
+  min-height: 100vh;
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -105,6 +105,16 @@ a {
   padding: 0.5rem;
   list-style: square;
 }
+.listEmpty{
+  width: 100%;
+  height: 200px;
+  color: grey;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
 .task,
 .taskCompleted {
   display: flex;
@@ -114,9 +124,13 @@ a {
 .taskCompleted {
   margin-left: 19px;
 }
-.task > span > input {
+.task > span > input{
   margin-right: 10px;
   transform: scale(1.25);
+  cursor: pointer;
+}
+.task > span > label{
+  cursor: pointer;
 }
 .deleteBtn,
 .editBtn {

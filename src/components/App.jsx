@@ -13,7 +13,6 @@ import ToDoItemCompleted from "./ToDoItemCompleted";
 
 function App() {
   const [inputTask, setInputTask] = useState("");
-  const [newValue, setNewValue] = useState("");
   const [tasks, setTasks] = useState([]);
   const [taskCompleted, setTaskCompleted] = useState([]);
   const [Loading, setLoading] = useState(true);
@@ -46,16 +45,11 @@ function App() {
     fetchData();
     setInputTask("");
   }
-  
-  function handleUpdate(e) {
-    const inputUpdateText = e.target.value;
-    console.log(inputUpdateText);
-    setNewValue(inputUpdateText);
-  }
+
   async function updateTask(id, taskName) {
     await Axios.put(`${backend_url}/update/${id}`, { taskName: taskName });
     fetchData();
-    setNewValue("");
+    // setNewValue("");
   }
 
   /* -------------------- Axios Routes for Completed Tasks -------------------- */
@@ -106,22 +100,28 @@ function App() {
   }
 
   function renderInCompleted() {
-    return !Loading
-      ? tasks.map((item) => {
+    return !Loading ? (
+      tasks.length > 0 ? (
+        tasks.map((item) => {
           return (
             <ToDoItem
               key={item._id}
               id={item._id}
               item={item}
-              updatePlaceholder={item.taskName}
               taskCompleted={addTaskCompleted}
               updateTask={updateTask}
-              handleUpdate={handleUpdate}
-              newValue={newValue}
             />
           );
         })
-      : "Loading...";
+      ) : (
+        <div className="listEmpty">
+          <p>Uh-Oh! Your List is Empty</p>
+          <p>Add New Task</p>
+        </div>
+      )
+    ) : (
+      "Loading..."
+    );
   }
 
   return (
